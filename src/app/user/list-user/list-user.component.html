@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col m4 s6" *ngFor="let user of users">
+      <div (click)="goToUser(user)" class="card horizontal" userBorderCard>
+        <div class="card-image">
+          <img class="activator" [src]="user.picture">
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <h4>{{user.name}}</h4>
+            <p>{{user.created | date:"dd/MM/yyyy"}}</p>
+            <span *ngFor="let type of user.types" class="{{type | userTypeColor}}">
+              {{type}}
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
