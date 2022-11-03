@@ -6,8 +6,12 @@ import {BorderCardDirective} from "./border-card.directive";
 import {UserTypeColorPipe} from "./user-type-color.pipe";
 import {RouterModule, Routes} from "@angular/router";
 import {UserService} from "./user.service";
+import {FormsModule} from "@angular/forms";
+import { UserFormComponent } from './user-form/user-form.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 const userRoutes:Routes=[
+  {path:"edit/user/:id",component:EditUserComponent},
   {path:"users",component:ListUserComponent},
   {path:"user/:id",component:DetailUserComponent},
 ]
@@ -17,10 +21,13 @@ const userRoutes:Routes=[
     ListUserComponent,
     DetailUserComponent,
     BorderCardDirective,
-    UserTypeColorPipe
+    UserTypeColorPipe,
+    UserFormComponent,
+    EditUserComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild(userRoutes)
   ],
   providers:[

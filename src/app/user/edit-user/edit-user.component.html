@@ -1,0 +1,7 @@
+<h2 class="center">
+  Editer {{user?.name}}
+</h2>
+<p *ngIf="user" class="center">
+  <img [src]="user.picture">
+</p>
+<app-user-form *ngIf="user" [user]="user"></app-user-form>

@@ -24,4 +24,8 @@ export class DetailUserComponent implements OnInit {
   goToUserList(): void{
     this.router.navigate(['/users']);
   }
+
+  goToEditUser(user: User){
+    this.router.navigate(['/edit/user',user.id]);
+  }
 }
