@@ -1,15 +1,60 @@
 import { Injectable } from '@angular/core';
 import {User} from "./user";
-import {POKEMONS} from "./mock-pokemon-list";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {catchError, Observable, of, tap} from "rxjs";
 
 @Injectable()
 export class UserService {
 
-  getUserList(): User[]{
-    return POKEMONS;
+  constructor(private http: HttpClient) {
   }
-  getUserById(userId: number): User|undefined{
-    return POKEMONS.find(user=>user.id == userId);
+
+  getUserList(): Observable<User[]>{
+    return this.http.get<User[]>('api/pokemons').pipe(
+      tap((userList)=> this.log(userList)),
+      catchError((error)=>this.handleError(error,[]))
+    );
+  }
+  getUserById(userId: number): Observable<User|undefined>{
+    return this.http.get<User>(`api/pokemons/${userId}`).pipe(
+      tap((user)=> this.log(user)),
+      catchError((error)=>this.handleError(error,undefined))
+    );
+  }
+
+  updateUser(user: User): Observable<null>{
+    const httpOptions = {
+      headers : new HttpHeaders({'Content-Type':'application/json'})
+    };
+    return this.http.put('api/pokemons',user,httpOptions).pipe(
+      tap((response)=> this.log(response)),
+      catchError((error)=>this.handleError(error,null))
+    );
+  }
+
+  addUser(user: User): Observable<null>{
+    const httpOptions = {
+      headers : new HttpHeaders({'Content-Type':'application/json'})
+    };
+    return this.http.post('api/pokemons',user,httpOptions).pipe(
+      tap((response)=> this.log(response)),
+      catchError((error)=>this.handleError(error,null))
+    );
+  }
+
+  deleteUserById(userId: number): Observable<null>{
+    return this.http.delete(`api/pokemons/${userId}`).pipe(
+      tap((response)=> this.log(response)),
+      catchError((error)=>this.handleError(error,null))
+    )
+  }
+
+  private log(response: any){
+    console.table(response);
+  }
+  private handleError(error: Error, errorValue: any){
+    console.error(error);
+    return of(errorValue);
   }
   getUserTypeList():string[]{
     return [

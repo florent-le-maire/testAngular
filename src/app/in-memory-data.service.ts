@@ -10,6 +10,7 @@ export class InMemoryDataService implements InMemoryDbService{
   constructor() { }
 
   createDb(): {} {
-    return {POKEMONS};
+    const pokemons = POKEMONS;
+    return {pokemons};
   }
 }

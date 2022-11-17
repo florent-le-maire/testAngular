@@ -13,7 +13,7 @@ export class ListUserComponent implements OnInit{
   constructor(private router: Router,private userService: UserService) {
   }
   ngOnInit(){
-    this.users = this.userService.getUserList();
+    this.userService.getUserList().subscribe(userList => this.users = userList);
   }
 
   goToUser(user: User){

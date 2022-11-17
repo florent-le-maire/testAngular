@@ -17,10 +17,14 @@ export class DetailUserComponent implements OnInit {
   ngOnInit(): void {
     const userId: string|null = this.route.snapshot.paramMap.get('id');
     if(userId){
-      this.user = this.userService.getUserById(+userId);
+      this.userService.getUserById(+userId).subscribe(user => this.user = user);
     }
   }
-
+  deleteUser(user: User){
+    this.userService.deleteUserById(user.id).subscribe(
+      ()=>this.goToUserList()
+    );
+  }
   goToUserList(): void{
     this.router.navigate(['/users']);
   }

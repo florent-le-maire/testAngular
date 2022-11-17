@@ -43,8 +43,10 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log("Submit form !");
-    this.router.navigate(['/user',this.user.id]);
+    //this.router.navigate(['/user',this.user.id]);
+    this.userService.updateUser(this.user).subscribe(()=> {
+        this.router.navigate(['/user', this.user.id]);
+    })
   }
 
 }

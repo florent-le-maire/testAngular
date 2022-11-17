@@ -9,6 +9,7 @@ import {UserService} from "./user.service";
 import {FormsModule} from "@angular/forms";
 import { UserFormComponent } from './user-form/user-form.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 const userRoutes:Routes=[
   {path:"edit/user/:id",component:EditUserComponent},
@@ -23,7 +24,8 @@ const userRoutes:Routes=[
     BorderCardDirective,
     UserTypeColorPipe,
     UserFormComponent,
-    EditUserComponent
+    EditUserComponent,
+    AddUserComponent
   ],
   imports: [
     CommonModule,
