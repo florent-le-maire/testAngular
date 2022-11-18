@@ -12,9 +12,10 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { SearchUserComponent } from './search-user/search-user.component';
 import { LoaderComponent } from './loader/loader.component';
+import { AuthGuard } from "../auth.guard";
 
 const userRoutes:Routes=[
-  {path:"edit/user/:id",component:EditUserComponent},
+  {path:"edit/user/:id",component:EditUserComponent, canActivate: [AuthGuard]},
   {path:"user/add",component:AddUserComponent},
   {path:"users",component:ListUserComponent},
   {path:"user/:id",component:DetailUserComponent},
