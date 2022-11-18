@@ -17,6 +17,19 @@
             Le nom du pokémon est requis (1-25).
           </div>
         </div>
+        <!-- user picture -->
+        <div *ngIf="isAddForm" class="form-group">
+          <label for="picture">Image</label>
+          <input type="text" class="form-control" id="picture"
+                 required
+                 [(ngModel)]="user.picture" name="picture"
+                 #picture="ngModel">
+
+          <div [hidden]="picture.valid || picture.pristine"
+               class="card-panel red accent-1">
+            L'image du user est requise.
+          </div>
+        </div>
 
         <!-- user hp -->
         <div class="form-group">
@@ -80,4 +93,6 @@
     </div>
   </div>
 </form>
-<h3 *ngIf="!user" class="center">Aucun pokémon à éditer...</h3>
+<h3 *ngIf="!user" class="center">
+  <app-loader></app-loader>
+</h3>

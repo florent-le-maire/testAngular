@@ -1,5 +1,6 @@
 <div class="container">
   <div class="row">
+    <app-search-user></app-search-user>
     <div class="col m4 s6" *ngFor="let user of users">
       <div (click)="goToUser(user)" class="card horizontal" userBorderCard>
         <div class="card-image">
@@ -20,3 +21,9 @@
     </div>
   </div>
 </div>
+<a class="btn-floating btn large waves-effect waves-light red z-depth-3"
+    style="position: fixed; bottom: 25px; right: 25px;"
+   routerLink="/user/add"
+>
+  +
+</a>

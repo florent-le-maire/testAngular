@@ -22,6 +22,16 @@ export class UserService {
     );
   }
 
+  searchUserList(term: string): Observable<User[]>{
+    if(term.length <= 1){
+      return of([]);
+    }
+    return this.http.get<User[]>(`api/pokemons/?name=${term}`).pipe(
+      tap((user)=> this.log(user)),
+      catchError((error)=>this.handleError(error,[]))
+    );
+  }
+
   updateUser(user: User): Observable<null>{
     const httpOptions = {
       headers : new HttpHeaders({'Content-Type':'application/json'})
@@ -32,11 +42,11 @@ export class UserService {
     );
   }
 
-  addUser(user: User): Observable<null>{
+  addUser(user: User): Observable<User>{
     const httpOptions = {
       headers : new HttpHeaders({'Content-Type':'application/json'})
     };
-    return this.http.post('api/pokemons',user,httpOptions).pipe(
+    return this.http.post<User>('api/pokemons',user,httpOptions).pipe(
       tap((response)=> this.log(response)),
       catchError((error)=>this.handleError(error,null))
     );
